@@ -27,6 +27,13 @@ while is_running:
     # appliquer le jueur
     screen.blit(game.player.image,game.player.rect)
 
+    # recuperr les projectiles du joueur
+    for projectile in game.player.all_projectiles:
+        projectile.move()
+
+    # appliquer les images du groupe de projectile
+    game.player.all_projectiles.draw(screen)
+
     # verifier si le joueur souhaite aller a gauche ou a droite
     if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width< screen.get_width():
         game.player.move_right()
@@ -47,5 +54,10 @@ while is_running:
         # detecter si un joueur lache une touche
         elif event.type == pygame.KEYDOWN:
             game.pressed[event.key] = True
+
+            # detecter si la touche espace est utilisée pour lancer projectile
+            if event.key == pygame.K_SPACE:
+                game.player.launch_projectile()
+
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
