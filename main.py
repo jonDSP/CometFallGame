@@ -24,7 +24,7 @@ while is_running:
     # appliquer le background
     screen.blit(background, (0,-200))
 
-    # appliquer le jueur
+    # appliquer le joueur
     screen.blit(game.player.image,game.player.rect)
 
     # recuperr les projectiles du joueur
@@ -33,6 +33,12 @@ while is_running:
 
     # appliquer les images du groupe de projectile
     game.player.all_projectiles.draw(screen)
+
+    # appliquer le groupe de monstrer
+    game.all_monsters.draw(screen)
+
+    for monster in game.all_monsters:
+        monster.forward()
 
     # verifier si le joueur souhaite aller a gauche ou a droite
     if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width< screen.get_width():
