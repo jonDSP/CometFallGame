@@ -27,6 +27,9 @@ while is_running:
     # appliquer le joueur
     screen.blit(game.player.image,game.player.rect)
 
+    # actualiser la barre du joueur
+    game.player.update_health_bar(screen)
+
     # recuperr les projectiles du joueur
     for projectile in game.player.all_projectiles:
         projectile.move()
@@ -39,6 +42,7 @@ while is_running:
 
     for monster in game.all_monsters:
         monster.forward()
+        monster.update_health_bar(screen)
 
     # verifier si le joueur souhaite aller a gauche ou a droite
     if game.pressed.get(pygame.K_RIGHT) and game.player.rect.x + game.player.rect.width< screen.get_width():
