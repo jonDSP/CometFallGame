@@ -19,6 +19,8 @@ class Player(pygame.sprite.Sprite):
     def damage(self,amount):
         if self.health - amount > 0:
             self.health -= amount
+        else:
+            self.game.game_over()
 
     def update_health_bar(self, surface):
         # dessiner la barre arriere
